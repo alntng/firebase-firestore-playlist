@@ -31,14 +31,34 @@ function renderCafe(doc) {
 }
 
 //getting data
+//real time listener
 firestore
   .collection("cafes")
-  .get()
-  .then(snapshot => {
-    snapshot.docs.forEach(doc => {
-      renderCafe(doc);
+  .orderBy("city")
+  .onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+      //   console.log(change.doc.id);
+      if (change.type == "added") {
+        renderCafe(change.doc);
+      } else if (change.type == "removed") {
+        let li = cafeList.querySelector(`[data-id = ${change.doc.id}]`);
+        cafeList.removeChild(li);
+      }
     });
   });
+
+// //one time listen
+// firestore
+//   .collection("cafes")
+//   //   .where("city", "==", "New York")
+//   .orderBy("city")
+//   .get()
+//   .then(snapshot => {
+//     snapshot.docs.forEach(doc => {
+//       renderCafe(doc);
+//     });
+//   });
 
 //saving data
 form.addEventListener("submit", e => {
