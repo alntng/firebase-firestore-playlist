@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h1>Cloud Cafe</h1>
+
+    <div class="content">
+      <form id="add-cafe-form"></form>
+
+      <ul id="cafe-list"></ul>
+    </div>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCT_8xcIY2lcK1u2AXLu24NpHvAkwWU5K4",
+        authDomain: "nn-tutorial-b221f.firebaseapp.com",
+        databaseURL: "https://nn-tutorial-b221f.firebaseio.com",
+        projectId: "nn-tutorial-b221f",
+        storageBucket: "nn-tutorial-b221f.appspot.com",
+        messagingSenderId: "597432118401",
+        appId: "1:597432118401:web:7ca08c8cbd7c0f1eb7b180"
+      };
+
+      const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+      const firestore = firebaseApp.firestore();
+
+      firestore.settings({ timestampsInSnapshots: true });
+    </script>
+
+    <script src="app.js"></script>
+  </body>
+</html>
